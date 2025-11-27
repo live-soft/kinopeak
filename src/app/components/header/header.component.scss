@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+
+.global-search {
+    @include mat.form-field-overrides((
+        outlined-outline-width: 1.4px,
+        outlined-outline-color: #E4E4E4,
+        outlined-container-shape: 10px,
+        outlined-input-text-placeholder-color: #959595,
+        outlined-hover-outline-color: #959595,
+        container-height: 30px,
+        container-vertical-padding: 12px,
+    ));
+}

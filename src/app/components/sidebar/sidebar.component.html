@@ -1,0 +1,19 @@
+<div class="flex flex-col px-6 py-3 h-20.1 text-slate-800 mb-6">
+    <div class="flex justify-start h-14.5 gap-2">
+        <img src="/images/logo.png" alt="" class="h-full">
+    </div>
+</div>
+
+@if (menuItems.length > 0) {
+    <nav class="font-inter">
+        @for (item of menuItems; track item?.path) {
+            <ul class="h-8 px-3 py-1.5 gap-2.5">
+                <li>
+                    <a [routerLink]="item?.path" class="flex flex-row px-3 py-3 gap-2.5 hover:text-purple-900">
+                        <span>{{ item?.name }}</span>
+                    </a>
+                </li>
+            </ul>
+        }
+    </nav>
+}
