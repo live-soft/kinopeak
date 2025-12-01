@@ -1,7 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
 // Packages
 import { filter } from 'rxjs/operators';
+// Services
+import { GenreService } from '@services/genre/genre.service';
+import { MenuService } from '@services/menu/menu.service';
+// Interfaces
+import { IGenre } from '@interfaces/genre.interface';
 
 @Component({
     selector: 'app-sidebar',
@@ -10,43 +15,25 @@ import { filter } from 'rxjs/operators';
     imports: [RouterLink],
 })
 export class SidebarComponent implements OnInit {
-    public menuItems = [
-        { name: 'Biographies', path: '/biographies' },
-        { name: 'Militants', path: '/militants' },
-        { name: 'Westerns', path: '/westerns' },
-        { name: 'Military', path: '/military' },
-        { name: 'Detectives', path: '/detectives' },
-        { name: "Children's", path: '/childrens' },
-        { name: 'Documentary', path: '/documentary' },
-        { name: 'Dramas', path: '/dramas' },
-        { name: 'Historical', path: '/historical' },
-        { name: 'Comedies', path: '/comedies' },
-        { name: 'Crime', path: '/crime' },
-        { name: 'Melodramas', path: '/melodramas' },
-        { name: 'Musicals', path: '/musicals' },
-        { name: 'Adventures', path: '/adventures' },
-        { name: 'Family', path: '/family' },
-        { name: 'Sports', path: '/sports' },
-        { name: 'Thrillers', path: '/thrillers' },
-        { name: 'Horrors', path: '/horrors' },
-        { name: 'Science fiction', path: '/science-fiction' },
-        { name: 'Fantasy', path: '/fantasy' },
-
-    ];
-
     private router = inject(Router);
+    private genreService = inject(GenreService);
+    public menuService = inject(MenuService);
 
     public ngOnInit(): void {
+        this.genreService.getGenres().subscribe((genres: IGenre[]) => {
+            this.menuService.menuItems.set(genres);
+        }); 
+
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
             .subscribe((event: any) => {
                 let li = document.querySelector(`li a[href="${event.urlAfterRedirects}"]`)?.parentElement;
 
-                document.querySelectorAll('li').forEach(el => el.classList.remove('bg-[#F1EEFE]', 'rounded-md', 'text-purple-900'));
+                // document.querySelectorAll('li').forEach(el => el.classList.remove('bg-[#F1EEFE]', 'rounded-md', 'text-purple-900'));
                 
-                if (li) {
-                    li.classList.add('bg-[#F1EEFE]', 'rounded-md', 'text-purple-900');
-                }
+                // if (li) {
+                //     li.classList.add('bg-[#F1EEFE]', 'rounded-md', 'text-purple-900');
+                // }
             });
     }
 }

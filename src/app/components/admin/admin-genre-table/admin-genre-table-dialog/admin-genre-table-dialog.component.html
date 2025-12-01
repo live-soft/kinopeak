@@ -1,0 +1,13 @@
+<div class="flex flex-row flex-nowrap justify-between items-center p-4">
+    <span class="text-2xl">Genre</span>
+    <button matButton mat-dialog-close>X</button>
+</div>
+<form [formGroup]="genreForm" class="flex flex-col items-end justify-evenly px-5 pt-2.5 pb-6">
+    <mat-form-field appearance="outline" class="w-full">
+        <input matInput placeholder="Name" class="!w-[235px]" matInput formControlName="name">
+    </mat-form-field>
+
+    <button matButton="outlined" class="!rounded-md !border-2 !border-[#E4E4E4]" (click)="onSave()">
+        <mat-icon>save</mat-icon> Save
+    </button>
+</form>

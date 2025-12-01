@@ -1,0 +1,36 @@
+<table mat-table [dataSource]="menuService.menuItems()" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="slug">
+        <th mat-header-cell *matHeaderCellDef>Slug</th>
+        <td mat-cell *matCellDef="let element"> {{element.slug}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef [style.width.px]="250">
+            <div class="flex flex-row flex-nowrap justify-between items-center">
+                <span>Actions</span>
+                <button matButton="outlined" class="!rounded-md !border-2 !border-[#E4E4E4]" (click)="openDialog()">
+                    <mat-icon>add</mat-icon> Add
+                </button>
+            </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <div class="flex flex-nowrap justify-between items-center">
+                <button matButton="outlined" class="!rounded-md !border-2 !border-[#E4E4E4]" (click)="openDialog(element.id)">
+                    <mat-icon>edit</mat-icon> Edit
+                </button>
+                <button matButton="outlined" class="!rounded-md !text-red-600 !border-2 !border-[#E4E4E4]" (click)="deleteGenre(element.id)">
+                    <mat-icon>delete</mat-icon> Delete
+                </button>
+            </div>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="!bg-[#d5e5f347]"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

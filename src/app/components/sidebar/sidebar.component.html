@@ -4,13 +4,14 @@
     </div>
 </div>
 
-@if (menuItems.length > 0) {
-    <nav class="font-inter">
-        @for (item of menuItems; track item?.path) {
-            <ul class="h-8 px-3 py-1.5 gap-2.5">
+@if (menuService.menuItems().length > 0) {
+    <span class="block text-center font-extrabold text-lg py-2 border border-gray-300 rounded-md bg-[#0071bb26]">Genres</span>
+    <nav class="font-inter flex flex-row flex-wrap justify-between bg-[#fbfbfb] py-3">
+        @for (item of menuService.menuItems(); track item?.slug) {
+            <ul class="h-8 px-3 py-1.5 gap-2.5 hover:bg-[#0071bb0d] w-[150px] cursor-pointer">
                 <li>
-                    <a [routerLink]="item?.path" class="flex flex-row px-3 py-3 gap-2.5 hover:text-purple-900">
-                        <span>{{ item?.name }}</span>
+                    <a [routerLink]="item?.slug" class="flex flex-row px-3 gap-2.5 hover:text-purple-900">
+                        <span class="font-semibold text-[#0c3c5a]">{{ item?.name }}</span>
                     </a>
                 </li>
             </ul>
