@@ -7,10 +7,12 @@ import { GenreService } from '@services/genre/genre.service';
 import { IGenre } from '@interfaces/genre.interface';
 // Components
 import { AdminGenreTableComponent } from '@components/admin/admin-genre-table/admin-genre-table.component';
+import { AdminMovieTableComponent } from '@components/admin/admin-movie-table/admin-movie-table.component';
+import { AdminFilmMakerTableComponent } from "@components/admin/admin-film-maker-table/admin-film-maker-table.component";
 
 @Component({
     selector: 'app-admin',
-    imports: [ MatTabsModule, AdminGenreTableComponent ],
+    imports: [MatTabsModule, AdminGenreTableComponent, AdminMovieTableComponent, AdminFilmMakerTableComponent],
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.scss',
 })

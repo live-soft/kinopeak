@@ -1,0 +1,34 @@
+<table mat-table [dataSource]="filmMakerItems()" class="mat-elevation-z8">
+    @for (column of displayedColumns; track column ) {
+    <ng-container [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef [style.width.px]="column == 'actions' ? 250 :'auto'">
+            <div class="flex flex-row flex-nowrap justify-between items-center">
+                <span>{{ column.replaceAll('_', ' ') | titlecase }}</span>
+
+                @if (column == 'actions') {
+                <button matButton="outlined" class="!rounded-md !border-2 !border-[#E4E4E4]" (click)="onDialog()">
+                    <mat-icon>add</mat-icon> Add
+                </button>
+                }
+            </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+            {{ element[column] | filmMakerTable: column }}
+
+            @if (column == 'actions') {
+                <div class="flex flex-nowrap justify-between items-center">
+                    <button matButton="outlined" class="!rounded-md !border-2 !border-[#E4E4E4]" (click)="onDialog(element.id)">
+                        <mat-icon>edit</mat-icon> Edit
+                    </button>
+                    <button matButton="outlined" class="!rounded-md !text-red-600 !border-2 !border-[#E4E4E4]" (click)="onDelete(element.id)">
+                        <mat-icon>delete</mat-icon> Delete
+                    </button>
+                </div>
+            }
+        </td>
+    </ng-container>
+    }
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="!bg-[#d5e5f347]"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

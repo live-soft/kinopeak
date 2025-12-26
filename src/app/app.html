@@ -1,11 +1,13 @@
-<aside class="border border-neutral-300 w-[305px] inline-block">
-    <app-sidebar></app-sidebar>
-</aside>
+<div class="relative w-full h-full">
+    <aside #dot1 class="border border-neutral-300 w-[305px] h-full inline-block">
+        <app-sidebar></app-sidebar>
+    </aside>
 
-<header class="absolute top-0 w-[calc(100%-305px)] inline-block">
-    <app-header></app-header>
-    
-    <content>
-        <router-outlet></router-outlet>
-    </content>
-</header>
+    <header #dot2 class="absolute top-0 left-[305px] w-[calc(100%-325px)] h-[calc(100vh-40px)] inline-block border border-gray-300 mt-5 ml-5">
+        <app-header></app-header>
+
+        <content>
+            <router-outlet></router-outlet>
+        </content>
+    </header>
+</div>

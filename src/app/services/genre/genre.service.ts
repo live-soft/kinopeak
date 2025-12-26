@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 // Packages
-import { concat, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 // Interfaces
 import { IGenre } from '@interfaces/genre.interface';
 

@@ -1,0 +1,65 @@
+<div class="flex flex-row flex-nowrap justify-between items-center p-4">
+    <h2 mat-dialog-title class="text-2xl">Film Maker</h2>
+    <button matButton mat-dialog-close>X</button>
+</div>
+
+<mat-dialog-content class="mat-typography !flex flex-row flex-wrap justify-end !pb-1">
+    <form [formGroup]="filmMakerForm" class="pb-6">
+        <div class="flex flex-wrap">
+            <mat-form-field appearance="outline" class="w-1/2 px-2">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-1/2 px-2">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-1/2 px-2">
+                <mat-label>Birth Date</mat-label>
+                <input matInput formControlName="birthDate" [matDatepicker]="picker">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-1/2 px-2">
+                <mat-label>Country</mat-label>
+                <input #input matInput formControlName="country" [matAutocomplete]="autocomplete">
+                <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="displayCountry">
+                    @for (country of filteredCountries | async; track $index) {
+                        <mat-option [value]="country">{{ country?.name }}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full px-2">
+                <mat-label>Roles</mat-label>
+                <mat-select formControlName="roles" [compareWith]="compareRoles" multiple>
+                    <mat-form-field class="w-full px-2">
+                        <mat-label>Search</mat-label>
+                        <input matInput [formControl]="rolesSearchControl" placeholder="Search roles...">
+                        
+                        @if (rolesSearchControl.value) {
+                            <button matSuffix matIconButton aria-label="Clear" (click)="rolesSearchControl.setValue('')">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        }
+                    </mat-form-field>
+
+                    @for (group of filteredRoles | async; track group.id) {
+                        <mat-optgroup [label]="group.career">
+                            @for (role of group.roles; track role.id) {
+                                <mat-option [value]="role">{{ role.name }}</mat-option>
+                            }
+                        </mat-optgroup>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+    <button matButton="outlined" class="!rounded-md !border-2 !border-[#E4E4E4]" (click)="onSave()">
+        <mat-icon>save</mat-icon> Save
+    </button>
+</mat-dialog-content>
+<mat-dialog-actions></mat-dialog-actions>

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
 // Packages
 import { filter } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe((event: any) => {
+            .subscribe((event: NavigationEnd) => {
                 let li = document.querySelector(`li a[href="${event.urlAfterRedirects}"]`)?.parentElement;
 
                 // document.querySelectorAll('li').forEach(el => el.classList.remove('bg-[#F1EEFE]', 'rounded-md', 'text-purple-900'));
